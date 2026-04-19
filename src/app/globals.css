@@ -10,6 +10,20 @@
   --color-foreground: var(--foreground);
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
+
+  /* VeloTrek brand colours */
+  --color-night:   #0D1B2A;
+  --color-marine:  #1B4F72;
+  --color-blue:    #2E86C1;
+  --color-action:  #E74C3C;
+  --color-amber:   #F39C12;
+  --color-surface: #F5F7FA;
+  --color-ink:     #1A1A2E;
+  --color-muted:   #4A5568;
+
+  /* VeloTrek brand fonts */
+  --font-heading: 'Space Grotesk', sans-serif;
+  --font-body:    'DM Sans', sans-serif;
 }
 
 @media (prefers-color-scheme: dark) {

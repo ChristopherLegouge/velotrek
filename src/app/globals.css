@@ -1,16 +1,7 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
-
+/* Design tokens — Tailwind v4 CSS-based config (source of truth for brand) */
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-
   /* VeloTrek brand colours */
   --color-night:   #0D1B2A;
   --color-marine:  #1B4F72;
@@ -24,17 +15,4 @@
   /* VeloTrek brand fonts */
   --font-heading: 'Space Grotesk', sans-serif;
   --font-body:    'DM Sans', sans-serif;
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
-}
-
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
 }

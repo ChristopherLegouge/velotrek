@@ -14,6 +14,7 @@ export type Database = {
         }
         Insert: Omit<Database['public']['Tables']['users']['Row'], 'id' | 'created_at'>
         Update: Partial<Database['public']['Tables']['users']['Insert']>
+        Relationships: []
       }
       trips: {
         Row: {
@@ -28,10 +29,12 @@ export type Database = {
         }
         Insert: Omit<Database['public']['Tables']['trips']['Row'], 'id' | 'created_at' | 'updated_at'>
         Update: Partial<Database['public']['Tables']['trips']['Insert']>
+        Relationships: []
       }
     }
     Views: Record<string, never>
     Functions: Record<string, never>
     Enums: Record<string, never>
+    CompositeTypes: Record<string, never>
   }
 }

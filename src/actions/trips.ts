@@ -106,3 +106,11 @@ export async function saveStages(tripId: string, stages: StageInput[]) {
   revalidatePath(`/planifier/${tripId}`)
   revalidatePath(`/trip/${tripId}`)
 }
+
+export async function togglePublic(id: string, isPublic: boolean) {
+  const supabase = await createSupabaseServerClient()
+  const { error } = await supabase.from('trips').update({ is_public: isPublic }).eq('id', id)
+  if (error) throw error
+  revalidatePath('/carnets')
+  revalidatePath(`/trip/${id}`)
+}

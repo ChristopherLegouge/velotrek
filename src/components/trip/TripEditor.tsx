@@ -6,6 +6,7 @@ import { useTrip } from '@/lib/hooks/useTrip'
 import { TripMapClient } from '@/components/map/TripMapClient'
 import { WaypointList } from '@/components/trip/WaypointList'
 import { TripStats } from '@/components/trip/TripStats'
+import { GpxControls } from '@/components/trip/GpxControls'
 import { Button } from '@/components/ui/Button'
 import { Input } from '@/components/ui/Input'
 import { createTrip, saveStages, updateTrip } from '@/actions/trips'
@@ -29,12 +30,18 @@ export function TripEditor({ tripId, initialTitle }: TripEditorProps) {
     [addWaypoint],
   )
 
+  async function handleGpxImport(coordinates: [number, number][]) {
+    dispatch({ type: 'LOAD_WAYPOINTS', waypoints: [], segments: [] })
+    for (const coords of coordinates) {
+      await addWaypoint(coords)
+    }
+  }
+
   async function handleSave() {
     startTransition(async () => {
       dispatch({ type: 'SET_SAVING', value: true })
       try {
         let id = state.tripId
-
         if (!id) {
           id = await createTrip(state.title)
           dispatch({ type: 'SET_TRIP_ID', id })
@@ -50,7 +57,7 @@ export function TripEditor({ tripId, initialTitle }: TripEditorProps) {
         }))
 
         await saveStages(id, stages)
-        router.push(`/carnets`)
+        router.push('/carnets')
       } finally {
         dispatch({ type: 'SET_SAVING', value: false })
       }
@@ -91,9 +98,12 @@ export function TripEditor({ tripId, initialTitle }: TripEditorProps) {
         </div>
 
         <div className="p-4 border-t border-gray-100 space-y-2">
-          <p className="text-xs text-muted text-center">
-            Clique sur la carte pour placer des points
-          </p>
+          <GpxControls
+            tripTitle={state.title}
+            waypoints={state.waypoints}
+            segments={state.segments}
+            onImport={handleGpxImport}
+          />
           <Button
             className="w-full"
             onClick={handleSave}

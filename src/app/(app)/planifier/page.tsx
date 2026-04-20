@@ -1,9 +1,4 @@
-import dynamic from 'next/dynamic'
-
-const MapBase = dynamic(
-  () => import('@/components/map/MapBase').then(m => m.MapBase),
-  { ssr: false, loading: () => <div className="h-full w-full bg-night animate-pulse" /> }
-)
+import { MapClient } from '@/components/map/MapClient'
 
 export default function PlanifierPage() {
   return (
@@ -16,7 +11,7 @@ export default function PlanifierPage() {
         </p>
       </aside>
       <div className="flex-1 relative">
-        <MapBase className="h-full w-full" />
+        <MapClient className="h-full w-full" />
       </div>
     </div>
   )
